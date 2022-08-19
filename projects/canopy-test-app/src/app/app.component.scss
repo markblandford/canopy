@@ -18,3 +18,9 @@
     background-color: var(--color-leafy-green);
   }
 }
+
+.radio-toggle-icon {
+  &#{&} {
+    margin: 0;
+  }
+}

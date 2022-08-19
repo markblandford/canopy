@@ -451,6 +451,26 @@
                 <lg-filter-checkbox value="blue">Blue</lg-filter-checkbox>
               </lg-filter-multiple-group>
 
+              <lg-radio-toggle-group formControlName="radioToggle">
+                Test radio toggle group
+                <lg-hint>Pick an option</lg-hint>
+                <lg-radio-toggle-button value="red">Red</lg-radio-toggle-button>
+                <lg-radio-toggle-button value="yellow">Yellow</lg-radio-toggle-button>
+                <lg-radio-toggle-button value="green">Green</lg-radio-toggle-button>
+                <lg-radio-toggle-button value="blue">Blue</lg-radio-toggle-button>
+              </lg-radio-toggle-group>
+
+              <lg-radio-toggle-group formControlName="radioToggle1">
+                Test radio toggle group, select / selected
+                <lg-radio-toggle-button
+                  *ngFor="let rt of radioToggles"
+                  [value]="rt.value"
+                >
+                  <lg-icon class="radio-toggle-icon" *ngIf="rt.value === radioToggle1Value" name="checkmark"></lg-icon>
+                  <span>{{ rt.value === radioToggle1Value ? 'Selected' : 'Select' }}</span>
+                </lg-radio-toggle-button>
+              </lg-radio-toggle-group>
+
               <lg-input-field>
                 Sort Code
                 <lg-hint>Must be 6 digits long</lg-hint>

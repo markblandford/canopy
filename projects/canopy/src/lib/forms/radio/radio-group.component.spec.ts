@@ -284,3 +284,76 @@ describe('LgRadioGroupComponent', () => {
     });
   });
 });
+
+@Component({
+  template: '',
+})
+class TestRadioToggleGroupComponent {
+  static placeholderTemplate = `<form>
+    <tag>
+      <childTag value="red">Red</childTag>
+      <childTag value="yellow">Yellow</childTag>
+    </tag>
+  </form>`;
+}
+
+describe('LgRadioGroupComponent - variants', () => {
+  const buildComponent = (
+    tag: string,
+    childTag: string,
+  ): ComponentFixture<TestRadioToggleGroupComponent> => {
+    const template = TestRadioToggleGroupComponent.placeholderTemplate
+      .replace(/tag/g, tag)
+      .replace(/childTag/g, childTag);
+
+    TestBed.configureTestingModule({
+      imports: [ FormsModule, ReactiveFormsModule ],
+      declarations: [
+        TestRadioToggleGroupComponent,
+        LgRadioGroupComponent,
+        LgRadioButtonComponent,
+      ],
+    })
+      .overrideComponent(TestRadioToggleGroupComponent, {
+        set: {
+          template,
+        },
+      })
+      .compileComponents();
+
+    const fixture = TestBed.createComponent(TestRadioToggleGroupComponent);
+
+    fixture.detectChanges();
+
+    return fixture;
+  };
+
+  const tests = [
+    { tag: 'lg-filter-group', childTag: 'lg-filter-button', expectedVariant: 'filter' },
+    { tag: 'lg-radio-group', childTag: 'lg-radio-button', expectedVariant: 'radio' },
+    {
+      tag: 'lg-radio-toggle-group',
+      childTag: 'lg-radio-toggle-button',
+      expectedVariant: 'toggle',
+    },
+    {
+      tag: 'lg-segment-group',
+      childTag: 'lg-segment-button',
+      expectedVariant: 'segment',
+    },
+  ];
+
+  tests.forEach(test => {
+    it(`should set the variant as ${test.expectedVariant} for the ${test.tag} selector`, () => {
+      const fixture = buildComponent(test.tag, test.childTag);
+      const groupInstance = fixture.debugElement
+        .query(By.directive(LgRadioGroupComponent))
+        .injector.get<LgRadioGroupComponent>(LgRadioGroupComponent);
+
+      expect(fixture.debugElement.query(By.css(test.tag))).toBeDefined();
+      fixture.detectChanges();
+
+      expect(groupInstance.variant).toEqual(test.expectedVariant);
+    });
+  });
+});

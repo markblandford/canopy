@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: [ './app.component.scss' ],
 })
 export class AppComponent {
   title = 'canopy-test-app';
   form: FormGroup;
   selectedTabIndex = 0;
   selectedSideNavIndex = 1;
+  radioToggle1Value: string;
   tabs: Array<unknown> = [
     {
       path: './tab-1',
@@ -47,9 +49,39 @@ export class AppComponent {
     },
   ];
 
-  onSubmit(event) {
-    console.log(event.value);
+  radioToggles = [
+    { value: 'red', label: 'select' },
+    { value: 'yellow', label: 'select' },
+    { value: 'green', label: 'select' },
+    { value: 'blue', label: 'select' },
+  ];
+
+  constructor(public fb: FormBuilder) {
+    this.form = this.fb.group({
+      text: [ '' ],
+      textSearch: [ '' ],
+      textPound: [ '' ],
+      textPercent: [ '' ],
+      select: [ '' ],
+      radio: [ '' ],
+      filter: [ '' ],
+      radioToggle: [ '' ],
+      radioToggle1: [ '' ],
+      colors: this.fb.control([]),
+      filters: this.fb.control([]),
+      checkbox: [ '' ],
+      switch: [ '' ],
+      segment: [ '' ],
+      date: [ '' ],
+      sortCode: [ '' ],
+    });
+
+    this.form.controls['radioToggle1'].valueChanges.subscribe(
+      v => (this.radioToggle1Value = v),
+    );
   }
+
+  onSubmit(event) {}
 
   handleTabClick(event: MouseEvent, index: number) {
     event.preventDefault();
@@ -59,24 +91,5 @@ export class AppComponent {
   handleSideNavClick(event: MouseEvent, index: number) {
     event.preventDefault();
     this.selectedSideNavIndex = index;
-  }
-
-  constructor(public fb: FormBuilder) {
-    this.form = this.fb.group({
-      text: [''],
-      textSearch: [''],
-      textPound: [''],
-      textPercent: [''],
-      select: [''],
-      radio: [''],
-      filter: [''],
-      colors: this.fb.control([]),
-      filters: this.fb.control([]),
-      checkbox: [''],
-      switch: [''],
-      segment: [''],
-      date: [''],
-      sortCode: ['']
-    });
   }
 }

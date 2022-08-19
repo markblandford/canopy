@@ -17,4 +17,8 @@
   --radio-segment-separator-border-color: var(--color-platinum);
   --radio-segment-label-min-width: calc(6 * var(--space-unit));
   --radio-segment-hover-bg-color: var(--color-super-blue-dark);
+
+  --radio-toggle-label-width: calc(8 * var(--space-unit));
+  --radio-toggle-checked-base-color: var(--color-leafy-green);
+  --radio-toggle-checked-hover-color: var(--color-leafy-green-dark);
 }

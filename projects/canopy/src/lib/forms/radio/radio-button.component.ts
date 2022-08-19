@@ -28,12 +28,14 @@ import type { RadioSize, RadioStackBreakpoint, RadioVariant } from './radio.inte
 let nextUniqueId = 0;
 
 @Component({
-  selector: 'lg-radio-button, lg-filter-button, lg-segment-button',
+  selector:
+    'lg-radio-button, lg-filter-button, lg-segment-button, lg-radio-toggle-button',
   templateUrl: './radio-button.component.html',
   styleUrls: [
     './radio-button.component.scss',
     './radio-button--filter.component.scss',
     './radio-button--segment.component.scss',
+    './radio-button--toggle.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,
 })

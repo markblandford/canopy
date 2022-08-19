@@ -39,6 +39,8 @@ export class LgButtonComponent implements AfterViewInit {
       );
     }
 
+    throw new Error('Not implemented');
+
     this.renderer.addClass(this.hostElement.nativeElement, `lg-btn--${variant}`);
     this._variant = variant;
   }

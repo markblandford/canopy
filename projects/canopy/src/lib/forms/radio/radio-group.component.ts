@@ -28,7 +28,7 @@ import type { RadioStackBreakpoint, RadioVariant } from './radio.interface';
 let uniqueId = 0;
 
 @Component({
-  selector: 'lg-radio-group, lg-filter-group, lg-segment-group',
+  selector: 'lg-radio-group, lg-radio-toggle-group, lg-filter-group, lg-segment-group',
   templateUrl: './radio-group.component.html',
   styleUrls: [ './radio-group.component.scss', './radio-group--segment.component.scss' ],
   encapsulation: ViewEncapsulation.None,
@@ -151,9 +151,13 @@ export class LgRadioGroupComponent implements ControlValueAccessor, AfterContent
     private hostElement: ElementRef,
     private renderer: Renderer2,
   ) {
-    this.variant = this.hostElement.nativeElement.tagName
-      .split('-')[1]
-      .toLowerCase() as RadioVariant;
+    const splitTag = this.hostElement.nativeElement.tagName.toLowerCase().split('-');
+
+    if (splitTag[1] === 'radio' && splitTag[2] === 'toggle') {
+      this.variant = splitTag[2] as RadioVariant;
+    } else {
+      this.variant = splitTag[1] as RadioVariant;
+    }
 
     if (this.control != null) {
       this.control.valueAccessor = this;
