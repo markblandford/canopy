@@ -11,12 +11,12 @@ jobs:
     if: ${{ !startsWith(github.head_ref, 'dependabot/')  }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: 'Setup node'
-        uses: actions/setup-node@v4.4.0
+        uses: actions/setup-node@v6.0.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -51,7 +51,7 @@ jobs:
 
       - name: 'Build storybook'
         run: npm run build:storybook -- --output-dir ./lg-sb-build
-      - uses: actions/upload-artifact@v4.6.2
+      - uses: actions/upload-artifact@v5.0.0
         with:
           name: lg-sb-build
           path: ./lg-sb-build
